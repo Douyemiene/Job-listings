@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Job } from "./components/Job";
+
+const details = ["5d ago", "Contract", "USA only"];
+
+const skills = ["Frontend", "Junior", "css", "JavaScript"];
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App pt-12 bg-bgCyan">
+      <Job
+        company="MyHome"
+        role="Junior Frontend Developer"
+        details={details}
+        filters={skills}
+      />
+      <Job
+        company="MyHome"
+        role="Junior Frontend Developer"
+        details={details}
+        filters={skills}
+      />
     </div>
   );
 }

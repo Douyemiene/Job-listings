@@ -11,7 +11,7 @@ module.exports = {
         darkerCyan: "#2c3a3a", //very dark cyan
       },
       fontFamily: {
-        roboto: ["Roboto", "sans-serif"],
+        spartan: ["Spartan", "sans-serif"],
       },
     },
   },

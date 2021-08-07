@@ -1,5 +1,5 @@
 import styled from "styled-components";
-const FirstFilterItem = styled.div`
+const FilterItem = styled.div`
   &:before {
     content: "•";
   }
@@ -11,7 +11,7 @@ export const Job = ({ data, children }) => {
     logo,
     when,
     featured,
-    postion,
+    position,
     role,
     level,
     postedAt,
@@ -21,42 +21,81 @@ export const Job = ({ data, children }) => {
     tools,
   } = data;
 
-  //const imageName = require('../images/photosnap.svg');
+  let bordered = "";
+  if (when && featured) {
+    bordered = "border-l-4 border-primary ";
+  }
 
-  // const imageName2 = require(str);
   return (
-    <div className="w-11/12 mx-auto bg-white mb-12 p-6 border-l-4 border-primary shadow-lg relative font-spartan">
+    <div
+      className={`${bordered} w-11/12 lg:w-10/12 mx-auto lg:flex items-center bg-white mb-12 px-6 pt-6 pb-5 lg:pb-8 shadow-lg relative font-spartan`}
+    >
       <img
         src={process.env.PUBLIC_URL + logo}
         alt="company logo"
-        className="h-12 absolute -top-6"
+        className="h-12 absolute lg:static lg:mr-8 lg:h-20 -top-6"
       />
 
       <div>
-        <div className="text-sm text-left mt-6">
-          <span className="text-primary font-bold">{company}</span>
-          {when && <span className="text-primary font-bold mx-3">NEW!</span>}
+        <div className="text-xs text-left mt-6">
+          <span className="text-primary font-bold ">{company}</span>
+          {when && (
+            <span className="bg-primary flex-inline justify-center items-center text-white font-bold mx-3 py-1 px-2 rounded-xl">
+              NEW!
+            </span>
+          )}
           {featured && (
-            <span className="text-primary font-bold uppercase">featured</span>
+            <span className="bg-black flex-inline justify-center items-center  text-white py-1 px-2 rounded-xl font-bold uppercase">
+              featured
+            </span>
           )}
         </div>
-        <div className="font-bold py-3 text-left">{role}</div>
+        <div className="font-bold py-4 text-left">{position}</div>
         <div className="flex flex-wrap text-darkerCyan text-sm">
-          <FirstFilterItem>
-            {" "}
-            <span className="mr-4 "></span>
-          </FirstFilterItem>
-          );
+          <FilterItemContainer filter={postedAt} noBullet />
+          <FilterItemContainer filter={contract} />
+          <FilterItemContainer filter={location} />
         </div>
-        <div className="my-4 bg-darkCyan" style={{ height: "1.2px" }} />
+        <div
+          className="my-4 bg-darkCyan lg:hidden"
+          style={{ height: "1.2px" }}
+        />
       </div>
-      <div className="flex flex-wrap content-between h-20">
+      <div className="flex flex-wrap content-between max-h-44 lg:flex-grow lg:justify-end">
         {tools.map((item) => (
-          <span className="px-2 py-1.5 text-primary bg-cyan shadow-sm text-sm font-semibold mr-2">
-            {item}{" "}
-          </span>
+          <ToolsAndLanguages toolOrSkill={item} />
+        ))}
+
+        {languages.map((item) => (
+          <ToolsAndLanguages toolOrSkill={item} />
         ))}
       </div>
     </div>
+  );
+};
+
+const FilterItemContainer = ({ filter, noBullet }) => {
+  return (
+    <>
+      {filter && (
+        <div className=" text-gray-500">
+          {noBullet ? (
+            <span className=" mr-3 "> {filter}</span>
+          ) : (
+            <FilterItem>
+              <span className="ml-0.5  mr-3 "> {filter}</span>
+            </FilterItem>
+          )}
+        </div>
+      )}
+    </>
+  );
+};
+
+const ToolsAndLanguages = ({ toolOrSkill }) => {
+  return (
+    <span className="px-2 py-1.5 shadow-sm text-primary bg-cyan text-sm font-semibold mr-2 mb-3">
+      {toolOrSkill}
+    </span>
   );
 };

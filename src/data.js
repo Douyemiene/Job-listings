@@ -12,7 +12,7 @@ export const jobs = [
     contract: "Full Time",
     location: "USA Only",
     languages: ["HTML", "CSS", "JavaScript"],
-    tools: [],
+    tools: ["webpack"],
   },
   {
     id: 2,

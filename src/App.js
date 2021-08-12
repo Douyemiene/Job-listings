@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import { Job } from "./components/Job";
 import { jobs } from "./data.js";
-import { RiCloseLine } from "react-icons/ri";
+impoimport { RiCloseLine } from "react-icons/ri";
 
 function App() {
   const [searchFilters, setSearchFilters] = useState([]);
@@ -54,5 +54,3 @@ const AddedFilter = ({ name }) => (
     </span>
   </div>
 );
-
-export default App;

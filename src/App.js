@@ -7,39 +7,60 @@ import AddedFilter from "./components/AddedFilter";
 export default function App() {
   const [searchFilters, setSearchFilters] = useState([]);
   const [filter, setFilter] = useState("");
+  const [filteredJobs, setFilteredJobs] = useState([]);
+
+  const search = (event) => {
+    addFilter();
+    if (filter) {
+      console.log("here");
+      const f = jobs.map((job, indx) => Object.values(job));
+      const ff = f.filter((job, idx) => job.includes(filter));
+      const filtered = jobs.filter((job, indx) =>
+        Object.values(job).includes(filter)
+      );
+      setFilteredJobs(filtered);
+    } else {
+      setFilteredJobs(jobs);
+    }
+  };
+
   const onFilterChange = (event) => {
     setFilter(event.target.value);
   };
   const addFilter = () => {
-    setSearchFilters([...searchFilters, filter]);
+    if (filter) {
+      setSearchFilters([...searchFilters, filter]);
+    }
   };
 
   const removeFilter = (targetFilter) => {
     setSearchFilters(searchFilters.filter((item) => item !== targetFilter));
+    search();
   };
   // }
   return (
     <div className="App pt-12 bg-bgCyan">
-      <div className="flex flex-wrap w-10/12 mx-auto bg-white px-2 mb-2 py-1">
-        {searchFilters.map((filter) => (
-          <AddedFilter name={filter} />
-        ))}
-      </div>
-      <div>
+      <div className="text-2xl lg:text-4xl font-semibold">Search for Jobs</div>
+      <div className="shadow-md w-10/12 mx-auto my-6 py-4 px-3 mb-16">
         <input
           type="search"
           onChange={onFilterChange}
-          className=" rounded-md w-10/12"
+          className="pl-2 rounded-md w-10/12 md:w-7/12 bg-white border-gray-400 border-2 lg:py-2 lg:mb-3 md:mr-3 lg:mr-6 lg:w-1/3"
         />
         <button
-          onClick={addFilter}
-          className="mt-4 rounded-md bg-black text-white px-2 py-1 text-sm mb-12"
+          onClick={search}
+          className="mt-4 rounded-md bg-black text-white px-2 py-1 text-sm mb-4"
         >
           Add filter
         </button>
+        <div className="flex flex-wrap lg:w-10/12 mx-auto mb-2">
+          {searchFilters.map((filter) => (
+            <AddedFilter name={filter} removeFilter={removeFilter} />
+          ))}
+        </div>
       </div>
       <div>
-        {jobs.map((jobItem) => (
+        {filteredJobs.map((jobItem) => (
           <Job data={jobItem} />
         ))}
       </div>

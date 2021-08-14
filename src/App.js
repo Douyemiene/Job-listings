@@ -7,22 +7,36 @@ import AddedFilter from "./components/AddedFilter";
 export default function App() {
   const [searchFilters, setSearchFilters] = useState([]);
   const [filter, setFilter] = useState("");
-  const [filteredJobs, setFilteredJobs] = useState([]);
+  const [filteredJobs, setFilteredJobs] = useState(jobs);
 
   const search = (event) => {
     addFilter();
+
     if (filter) {
-      console.log("here");
-      const f = jobs.map((job, indx) => Object.values(job));
-      const ff = f.filter((job, idx) => job.includes(filter));
-      const filtered = jobs.filter((job, indx) =>
-        Object.values(job).includes(filter)
+      const start = jobs.map(({ position, location, languages, tools }) =>
+        [position, location].concat(languages, tools)
       );
-      setFilteredJobs(filtered);
+
+      const st = start.map((job) =>
+        job.map((jobItem) => {
+          return jobItem.toLowerCase();
+        })
+      );
+
+      const filtered = st.map((job, idx) => {
+        if (job.includes(filter)) {
+          return jobs[idx];
+        }
+        return null;
+      });
+
+      const filteredJobs = filtered.filter((job) => job != null);
+
+      setFilteredJobs(filteredJobs);
     } else {
       setFilteredJobs(jobs);
     }
-  };
+  }; //search end
 
   const onFilterChange = (event) => {
     setFilter(event.target.value);
@@ -35,7 +49,7 @@ export default function App() {
 
   const removeFilter = (targetFilter) => {
     setSearchFilters(searchFilters.filter((item) => item !== targetFilter));
-    search();
+    //search();
   };
   // }
   return (

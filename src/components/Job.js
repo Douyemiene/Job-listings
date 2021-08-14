@@ -1,19 +1,18 @@
 import styled from "styled-components";
+
 const FilterItem = styled.div`
   &:before {
     content: "•";
   }
 `;
 
-export const Job = ({ data, children }) => {
+export const Job = ({ data }) => {
   const {
     company,
     logo,
     when,
     featured,
     position,
-    role,
-    level,
     postedAt,
     contract,
     location,

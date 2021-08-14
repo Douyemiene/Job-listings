@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { Job } from "./components/Job";
 import { jobs } from "./data.js";
@@ -9,6 +9,14 @@ export default function App() {
   const [searchFilters, setSearchFilters] = useState([]);
   const [filter, setFilter] = useState("");
   const [filteredJobs, setFilteredJobs] = useState(jobs);
+
+  useEffect(() => {
+    search();
+  }, [searchFilters]);
+
+  useEffect(() => {
+    console.log("filteredJobs", filteredJobs);
+  }, [filteredJobs]);
 
   let jobsAndTheirFilters = jobs.map(
     ({ role, level, location, languages, tools }) =>
@@ -22,16 +30,16 @@ export default function App() {
   );
 
   const search = (event) => {
-    addFilter();
-
-    if (filter) {
+    if (searchFilters.length !== 0) {
+      console.log("this", searchFilters.length);
       const filteredJobsAndNulls = jobsAndTheirFilters.map((job, idx) => {
-        if (job.includes(filter)) {
+        if (searchFilters.every((item) => job.includes(item))) {
           return jobs[idx];
         }
         return null;
       });
 
+      console.log("noww", filteredJobsAndNulls);
       const filteredJobs = filteredJobsAndNulls.filter((job) => job != null);
 
       setFilteredJobs(filteredJobs);
@@ -43,6 +51,7 @@ export default function App() {
   const onFilterChange = (event) => {
     setFilter(event.target.value);
   };
+
   const addFilter = () => {
     if (filter) {
       setSearchFilters([...searchFilters, filter]);
@@ -51,9 +60,8 @@ export default function App() {
 
   const removeFilter = (targetFilter) => {
     setSearchFilters(searchFilters.filter((item) => item !== targetFilter));
-    //search();
   };
-  // }
+
   return (
     <div className="App pt-12 bg-bgCyan">
       <div className="text-2xl lg:text-4xl font-semibold">Search for Jobs</div>
@@ -64,7 +72,7 @@ export default function App() {
           className="pl-2 rounded-md w-10/12 md:w-7/12 bg-white border-gray-400 border-2 lg:py-2 lg:mb-3 md:mr-3 lg:mr-6 lg:w-1/3"
         />
         <button
-          onClick={search}
+          onClick={addFilter}
           className="mt-4 rounded-md bg-black text-white px-2 py-1 text-sm mb-4"
         >
           Add filter

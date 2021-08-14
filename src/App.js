@@ -13,24 +13,25 @@ export default function App() {
     addFilter();
 
     if (filter) {
-      const start = jobs.map(({ position, location, languages, tools }) =>
-        [position, location].concat(languages, tools)
+      let jobsAndTheirFilters = jobs.map(
+        ({ position, location, languages, tools }) =>
+          [position, location].concat(languages, tools)
       );
 
-      const st = start.map((job) =>
+      jobsAndTheirFilters = jobsAndTheirFilters.map((job) =>
         job.map((jobItem) => {
           return jobItem.toLowerCase();
         })
       );
 
-      const filtered = st.map((job, idx) => {
+      const filteredJobsAndNulls = jobsAndTheirFilters.map((job, idx) => {
         if (job.includes(filter)) {
           return jobs[idx];
         }
         return null;
       });
 
-      const filteredJobs = filtered.filter((job) => job != null);
+      const filteredJobs = filteredJobsAndNulls.filter((job) => job != null);
 
       setFilteredJobs(filteredJobs);
     } else {

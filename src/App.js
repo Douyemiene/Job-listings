@@ -5,25 +5,26 @@ import { jobs } from "./data.js";
 import AddedFilter from "./components/AddedFilter";
 
 export default function App() {
+  //state
   const [searchFilters, setSearchFilters] = useState([]);
   const [filter, setFilter] = useState("");
   const [filteredJobs, setFilteredJobs] = useState(jobs);
+
+  let jobsAndTheirFilters = jobs.map(
+    ({ role, level, location, languages, tools }) =>
+      [role, level, location].concat(languages, tools)
+  );
+
+  jobsAndTheirFilters = jobsAndTheirFilters.map((job) =>
+    job.map((jobItem) => {
+      return jobItem.toLowerCase();
+    })
+  );
 
   const search = (event) => {
     addFilter();
 
     if (filter) {
-      let jobsAndTheirFilters = jobs.map(
-        ({ position, location, languages, tools }) =>
-          [position, location].concat(languages, tools)
-      );
-
-      jobsAndTheirFilters = jobsAndTheirFilters.map((job) =>
-        job.map((jobItem) => {
-          return jobItem.toLowerCase();
-        })
-      );
-
       const filteredJobsAndNulls = jobsAndTheirFilters.map((job, idx) => {
         if (job.includes(filter)) {
           return jobs[idx];

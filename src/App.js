@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import { Job } from "./components/Job";
-import { jobs } from "./data.js";
-import AddedFilter from "./components/AddedFilter";
+import { Job } from "../components/Job";
+import { jobs } from "../data.js";
+import AddedFilter from "../components/AddedFilter";
 import styled from "styled-components";
 
 export default function App() {
@@ -14,106 +14,6 @@ export default function App() {
       setNavState("open");
     }
   };
-  const NavIcon = styled.div`
-    width: 60px;
-    height: 45px;
-    position: relative;
-    margin: 50px auto;
-    -webkit-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-    -webkit-transition: 0.5s ease-in-out;
-    -moz-transition: 0.5s ease-in-out;
-    -o-transition: 0.5s ease-in-out;
-    transition: 0.5s ease-in-out;
-    cursor: pointer;
-
-    &:hover {
-    }
-
-    & span {
-      display: block;
-      position: absolute;
-      height: 5px;
-      width: 50%;
-      background: #000;
-      opacity: 1;
-      -webkit-transform: rotate(0deg);
-      -moz-transform: rotate(0deg);
-      -o-transform: rotate(0deg);
-      transform: rotate(0deg);
-      -webkit-transition: 0.25s ease-in-out;
-      -moz-transition: 0.25s ease-in-out;
-      -o-transition: 0.25s ease-in-out;
-      transition: 0.25s ease-in-out;
-    }
-
-    pan:nth-child(even) {
-      left: 50%;
-      border-radius: 0 9px 9px 0;
-    }
-
-    & span:nth-child(odd) {
-      left: 0px;
-      border-radius: 9px 0 0 9px;
-    }
-
-    & span:nth-child(1),
-    & span:nth-child(2) {
-      top: 0px;
-    }
-
-    & span:nth-child(3),
-    & span:nth-child(4) {
-      top: 10px;
-    }
-
-    & span:nth-child(5) {
-      top: 20px;
-    }
-
-    &.open span:nth-child(1) {
-      -webkit-transform: rotate(45deg);
-      -moz-transform: rotate(45deg);
-      -o-transform: rotate(45deg);
-      transform: rotate(45deg);
-    }
-
-    &.open span:nth-child(2),
-    &.open span:nth-child(5) {
-      -webkit-transform: rotate(-45deg);
-      -moz-transform: rotate(-45deg);
-      -o-transform: rotate(-45deg);
-      transform: rotate(-45deg);
-    }
-
-    &.open span:nth-child(1) {
-      left: 0px;
-      top: 7px;
-    }
-
-    &.open span:nth-child(2) {
-      right: 50%;
-      top: 7px;
-    }
-
-    &.open span:nth-child(3) {
-      left: -50%;
-      opacity: 0;
-    }
-
-    &.open span:nth-child(4) {
-      left: 100%;
-      opacity: 0;
-    }
-
-    &.open span:nth-child(5) {
-      opacity: 0;
-      left: 5px;
-      top: 29px;
-    }
-  `;
 
   //state
   const [searchFilters, setSearchFilters] = useState([]);
@@ -210,3 +110,104 @@ export default function App() {
     </div>
   );
 }
+
+const NavIcon = styled.div`
+  width: 60px;
+  height: 45px;
+  position: relative;
+  margin: 50px auto;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+  -o-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+  }
+
+  & span {
+    display: block;
+    position: absolute;
+    height: 5px;
+    width: 50%;
+    background: #000;
+    opacity: 1;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: 0.25s ease-in-out;
+    -moz-transition: 0.25s ease-in-out;
+    -o-transition: 0.25s ease-in-out;
+    transition: 0.25s ease-in-out;
+  }
+
+  pan:nth-child(even) {
+    left: 50%;
+    border-radius: 0 9px 9px 0;
+  }
+
+  & span:nth-child(odd) {
+    left: 0px;
+    border-radius: 9px 0 0 9px;
+  }
+
+  & span:nth-child(1),
+  & span:nth-child(2) {
+    top: 0px;
+  }
+
+  & span:nth-child(3),
+  & span:nth-child(4) {
+    top: 10px;
+  }
+
+  & span:nth-child(5) {
+    top: 20px;
+  }
+
+  &.open span:nth-child(1) {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+
+  &.open span:nth-child(2),
+  &.open span:nth-child(5) {
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+  }
+
+  &.open span:nth-child(1) {
+    left: 0px;
+    top: 7px;
+  }
+
+  &.open span:nth-child(2) {
+    right: 50%;
+    top: 7px;
+  }
+
+  &.open span:nth-child(3) {
+    left: -50%;
+    opacity: 0;
+  }
+
+  &.open span:nth-child(4) {
+    left: 100%;
+    opacity: 0;
+  }
+
+  &.open span:nth-child(5) {
+    opacity: 0;
+    left: 5px;
+    top: 29px;
+  }
+`;

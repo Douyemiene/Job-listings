@@ -29,11 +29,7 @@ export const Job = ({ data }) => {
     <div
       className={`${bordered} w-11/12  mx-auto items-center bg-white mb-12 px-6 pt-6 pb-5 shadow-lg relative font-spartan`}
     >
-      <img
-        src={process.env.PUBLIC_URL + logo}
-        alt="company logo"
-        className="h-12 absolute  -top-6"
-      />
+      <img src={logo} alt="company logo" className="h-12 absolute  -top-6" />
 
       <div>
         <div className="text-xs text-left mt-6">

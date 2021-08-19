@@ -27,12 +27,12 @@ export const Job = ({ data }) => {
 
   return (
     <div
-      className={`${bordered} w-11/12 lg:w-10/12 mx-auto lg:flex items-center bg-white mb-12 px-6 pt-6 pb-5 lg:pb-8 shadow-lg relative font-spartan`}
+      className={`${bordered} w-11/12  mx-auto items-center bg-white mb-12 px-6 pt-6 pb-5 shadow-lg relative font-spartan`}
     >
       <img
         src={process.env.PUBLIC_URL + logo}
         alt="company logo"
-        className="h-12 absolute lg:static lg:mr-8 lg:h-20 -top-6"
+        className="h-12 absolute  -top-6"
       />
 
       <div>
@@ -60,7 +60,7 @@ export const Job = ({ data }) => {
           style={{ height: "1.2px" }}
         />
       </div>
-      <div className="flex flex-wrap content-between max-h-44 lg:flex-grow lg:justify-end">
+      <div className="flex flex-wrap content-between max-h-44 mt-4">
         {tools.map((item) => (
           <ToolsAndLanguages toolOrSkill={item} />
         ))}

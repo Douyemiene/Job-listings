@@ -3,8 +3,118 @@ import "./App.css";
 import { Job } from "./components/Job";
 import { jobs } from "./data.js";
 import AddedFilter from "./components/AddedFilter";
+import styled from "styled-components";
 
 export default function App() {
+  const [navState, setNavState] = useState(""); //typescript typescript typescript
+  const onToggleNav = () => {
+    if (navState) {
+      setNavState("");
+    } else {
+      setNavState("open");
+    }
+  };
+  const NavIcon = styled.div`
+    width: 60px;
+    height: 45px;
+    position: relative;
+    margin: 50px auto;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: 0.5s ease-in-out;
+    -moz-transition: 0.5s ease-in-out;
+    -o-transition: 0.5s ease-in-out;
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+    }
+
+    & span {
+      display: block;
+      position: absolute;
+      height: 5px;
+      width: 50%;
+      background: #000;
+      opacity: 1;
+      -webkit-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+      -webkit-transition: 0.25s ease-in-out;
+      -moz-transition: 0.25s ease-in-out;
+      -o-transition: 0.25s ease-in-out;
+      transition: 0.25s ease-in-out;
+    }
+
+    pan:nth-child(even) {
+      left: 50%;
+      border-radius: 0 9px 9px 0;
+    }
+
+    & span:nth-child(odd) {
+      left: 0px;
+      border-radius: 9px 0 0 9px;
+    }
+
+    & span:nth-child(1),
+    & span:nth-child(2) {
+      top: 0px;
+    }
+
+    & span:nth-child(3),
+    & span:nth-child(4) {
+      top: 10px;
+    }
+
+    & span:nth-child(5) {
+      top: 20px;
+    }
+
+    &.open span:nth-child(1) {
+      -webkit-transform: rotate(45deg);
+      -moz-transform: rotate(45deg);
+      -o-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+
+    &.open span:nth-child(2),
+    &.open span:nth-child(5) {
+      -webkit-transform: rotate(-45deg);
+      -moz-transform: rotate(-45deg);
+      -o-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+    }
+
+    &.open span:nth-child(1) {
+      left: 0px;
+      top: 7px;
+    }
+
+    &.open span:nth-child(2) {
+      right: 50%;
+      top: 7px;
+    }
+
+    &.open span:nth-child(3) {
+      left: -50%;
+      opacity: 0;
+    }
+
+    &.open span:nth-child(4) {
+      left: 100%;
+      opacity: 0;
+    }
+
+    &.open span:nth-child(5) {
+      opacity: 0;
+      left: 5px;
+      top: 29px;
+    }
+  `;
+
   //state
   const [searchFilters, setSearchFilters] = useState([]);
   const [filter, setFilter] = useState("");
@@ -64,6 +174,15 @@ export default function App() {
 
   return (
     <div className="App pt-12 bg-bgCyan">
+      <div className="py-4 flex justify-end px-4">
+        <NavIcon className={navState} onClick={onToggleNav}>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </NavIcon>
+      </div>
       <div className="text-2xl lg:text-4xl font-semibold">Search for Jobs</div>
       <div className="shadow-md w-10/12 mx-auto my-6 py-4 px-3 mb-16">
         <input
@@ -83,7 +202,7 @@ export default function App() {
           ))}
         </div>
       </div>
-      <div>
+      <div className="md:grid grid-cols-2 lg:grid-cols-3 gap-x-2 md:px-6 lg:px-16">
         {filteredJobs.map((jobItem) => (
           <Job data={jobItem} />
         ))}

@@ -182,20 +182,24 @@ export default function Jobs() {
           <span></span>
         </NavIcon>
       </div> */}
-      <div className="text-2xl lg:text-4xl font-semibold">Search for Jobs</div>
-      <div className="shadow-md w-10/12 mx-auto my-6 py-4 px-3 mb-16">
-        <input
-          type="search"
-          onChange={onFilterChange}
-          className="pl-2 rounded-md w-10/12 md:w-7/12 bg-white border-gray-400 border-2 lg:py-2 lg:mb-3 md:mr-3 lg:mr-6 lg:w-1/3"
-        />
-        <button
-          onClick={addFilter}
-          className="mt-4 rounded-md bg-black text-white px-2 py-1 text-sm mb-4"
-        >
-          Add filter
-        </button>
-        <div className="flex flex-wrap lg:w-10/12 mx-auto mb-2">
+      <div className="text-2xl lg:text-4xl font-semibold text-center">
+        Search for Jobs
+      </div>
+      <div className="shadow-md w-10/12 lg:flex lg:flex-col items-center  mx-auto my-6 py-4 px-3 mb-16">
+        <div className="flex h-12 items-center">
+          <input
+            type="search"
+            onChange={onFilterChange}
+            className="pl-2 rounded-md flex-grow mr-4 md:w-7/12 bg-white border-gray-400 border-2 lg:py-2  md:mr-3 lg:mr-6 lg:w-7/12"
+          />
+          <button
+            onClick={addFilter}
+            className="rounded-md bg-black text-white px-2 py-1 text-sm"
+          >
+            Add filter
+          </button>
+        </div>
+        <div className="flex flex-wrap max-w-max mt-3 lg:w-10/12 mx-auto">
           {searchFilters.map((filter) => (
             <AddedFilter name={filter} removeFilter={removeFilter} />
           ))}
